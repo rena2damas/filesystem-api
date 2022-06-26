@@ -3,7 +3,7 @@ from flask_restful import Api, Resource
 from http.client import HTTPException
 
 from src import utils
-from src.services.filesystem import FilesystemAPI
+from src.services.filesystem import FilesystemSvc
 from src.api.auth import current_username, requires_auth
 
 blueprint = Blueprint("filesystem", __name__)
@@ -52,15 +52,15 @@ class Filesystem(Resource):
         """
         path = utils.normpath(path)
         username = current_username
-        fs_api = FilesystemAPI(username=username)
+        fs = FilesystemSvc(username=username)
         try:
             accept = request.headers.get("accept", "application/json")
             if accept == "application/json":
-                return jsonify(fs_api.list_files(path=path))
+                return jsonify(fs.list_files(path=path))
             elif accept == "application/octet-stream":
-                stats = fs_api.list_files(path=path, flags="-dlL")[0]
+                stats = fs.list_files(path=path, flags="-dlL")[0]
                 mode = utils.file_mode(stats=stats)
-                name, content = fs_api.attachment(path=path, mode=mode)
+                name, content = fs.attachment(path=path, mode=mode)
                 return send_file(content, attachment_filename=name, as_attachment=True)
             raise HTTPException("unsupported 'accept' HTTP header")
 
@@ -117,7 +117,7 @@ class Filesystem(Resource):
         """
         path = utils.normpath(path)
         username = current_username
-        fs = FilesystemAPI(username=username)
+        fs = FilesystemSvc(username=username)
         files = request.files.to_dict(flat=False).get("files", [])
         if not files:
             utils.abort_with(code=400, message="missing files")
@@ -178,7 +178,7 @@ class Filesystem(Resource):
         """
         path = utils.normpath(path)
         username = current_username
-        fs = FilesystemAPI(username=username)
+        fs = FilesystemSvc(username=username)
         files = request.files.to_dict(flat=False).get("files", [])
         if not files:
             utils.abort_with(code=400, message="missing files")
@@ -227,7 +227,7 @@ class Filesystem(Resource):
         """
         path = utils.normpath(path)
         username = current_username
-        fs = FilesystemAPI(username=username)
+        fs = FilesystemSvc(username=username)
         try:
             fs.delete_file(path=path)
             return utils.http_response(204), 204

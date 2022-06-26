@@ -26,7 +26,7 @@ class FileManagerActions(Resource):
         tags:
             - File Manager
         responses:
-            201:
+            200:
                 content:
                     application/json:
                         schema:

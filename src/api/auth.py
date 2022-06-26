@@ -4,7 +4,7 @@ from flask import g, request
 from flask_restful import abort
 from werkzeug.local import LocalProxy
 
-from src.services.auth import AuthAPI
+from src.services.auth import AuthSvc
 
 
 # proxy to get username from g
@@ -20,7 +20,7 @@ def requires_auth(schemes=("basic",)):
         def decorated(*args, **kwargs):
             if "basic" in schemes:
                 auth = request.authorization
-                if auth and AuthAPI.authenticate(
+                if auth and AuthSvc.authenticate(
                     username=auth.username, password=auth.password
                 ):
                     g.username = auth.username
