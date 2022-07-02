@@ -1,5 +1,5 @@
 from marshmallow import fields, Schema
-from schemas.serlializers.http import HttpResponseSchema
+from schemas.serializers.http import HttpResponseSchema
 
 
 class StatsSchema(Schema):
