@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 from src import utils
 from src.api.auth import current_username, requires_auth
 from src.schemas.deserializers import filemgr as dsl
-from src.schemas.serlializers import filemgr as sl
+from src.schemas.serializers import filemgr as sl
 from src.services.filemgr import FileManagerSvc
 
 blueprint = Blueprint("file_manager", __name__, url_prefix="/file-manager")
@@ -23,7 +23,7 @@ class FileManagerActions(Resource):
         Use request body to specify intended action on given path.
         ---
         tags:
-            - File Manager
+            - file manager
         responses:
             200:
                 content:
@@ -170,7 +170,7 @@ class FileManagerDownload(Resource):
         Download files. Multiple files are merged into a zipped file.
         ---
         tags:
-            - File Manager
+            - file manager
         responses:
             200:
                 content:
@@ -206,7 +206,7 @@ class FileManagerUpload(Resource):
         Upload files.
         ---
         tags:
-            - File Manager
+            - file manager
         responses:
             200:
                 content:
@@ -240,7 +240,7 @@ class FileManagerImages(Resource):
         Get images.
         ---
         tags:
-            - File Manager
+            - file manager
         parameters:
             - in: query
               name: path
