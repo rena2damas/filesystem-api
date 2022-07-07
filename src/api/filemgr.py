@@ -229,7 +229,7 @@ class FileManagerDownload(Resource):
             utils.abort_with(403)
         except FileNotFoundError:
             utils.abort_with(404)
-        except OSError:
+        except (OSError, ValidationError):
             utils.abort_with(400)
 
 
