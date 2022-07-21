@@ -19,17 +19,17 @@ class Filesystem(Resource):
         """
         List files in given path.
         ---
-        parameters:
-        - in: path
-          name: path
-          schema:
-            type: string
-          required: true
-          description: the path to list content from
         tags:
             - filesystem
         security:
             - BasicAuth: []
+        parameters:
+            - in: path
+              name: path
+              schema:
+                type: string
+              required: true
+              description: the path to list content from
         responses:
             200:
                 description: Ok
@@ -83,17 +83,17 @@ class Filesystem(Resource):
         """
         Create files in given path.
         ---
-        parameters:
-        - in: path
-          name: path
-          schema:
-            type: string
-          required: true
-          description: the directory to create the resource at
         tags:
             - filesystem
         security:
             - BasicAuth: []
+        parameters:
+            - in: path
+              name: path
+              schema:
+                type: string
+              required: true
+              description: the directory to create the resource at
         requestBody:
             content:
                 multipart/form-data:
@@ -144,17 +144,17 @@ class Filesystem(Resource):
         """
         Update files in given path.
         ---
-        parameters:
-        - in: path
-          name: path
-          schema:
-            type: string
-          required: true
-          description: the directory to update the resource at
         tags:
             - filesystem
         security:
             - BasicAuth: []
+        parameters:
+            - in: path
+              name: path
+              schema:
+                type: string
+              required: true
+              description: the directory to update the resource at
         requestBody:
             content:
                 multipart/form-data:
@@ -205,17 +205,17 @@ class Filesystem(Resource):
         """
         Delete file in given path.
         ---
-        parameters:
-        - in: path
-          name: path
-          schema:
-            type: string
-          required: true
-          description: the path of the file
         tags:
             - filesystem
         security:
             - BasicAuth: []
+        parameters:
+            - in: path
+              name: path
+              schema:
+                type: string
+              required: true
+              description: the path of the file
         responses:
             204:
                 content:
